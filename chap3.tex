@@ -19,7 +19,7 @@ For simplicity, the above enumeration omits the absolute coordinate variants of 
 \section{Modeling SVGs}
 We would like to model SVG inputs without loss of information about pen movements.
 In essence, since SVGs name ordered lists of paths and their drawing commands, we model them as a sequence of mathematical parameters for the pen drawing commands and add a command for representing the transition between paths.
-The sequential nature of this representation makes the generation task well-suited to a recurrent neural network architecture, as we cover in Chapter~\ref{chap:architecture}.
+The sequential nature of this representation makes the generation task well-suited to a recurrent neural network architecture, as we cover in Section~\ref{sec:architecture}.
 
 \subsection{Preprocessing}
 SVG icons and font glyphs often have additional properties like stroke and fill style.
@@ -33,7 +33,7 @@ To constrain the generation process slightly, we first homogenize our dataset by
 There is also variability in the direction of path drawing and in starting positions. Instead of controlling these factors in the preprocessing stage, our architecture is designed for bidirectionality, and all command sequences are prepended such that the pen starts at coordinate $(0, 0)$.
 
 \subsection{Simplifying path commands}
-As seen in our dataset statistics in Sections~\ref{sec:icon-data} and~\ref{sec:font-data}, the most common SVG path command used in our input data is the cubic B\'ezier drawing command, \code{c}, by a large margin.
+As seen in our dataset statistics in Section~\ref{sec:font-data}, the most common SVG path command used in our input data is the cubic B\'ezier drawing command, \code{c}, by a large margin.
 To avoid bias and to constrain the problem space (\TODO{wording?}), we instead consolidate the different path commands into a single feature representation.
 
 Out of the five SVG path commands, three are parametic equations of differing degrees, so we can model these three (lines, quadratic B\'eziers, and cubic B\'eziers) using the parameter space for the highest degree cubic-order equation.
@@ -86,7 +86,7 @@ E & \code{e, c1, c2, pen\_state}\\
 \end{minipage}
 \end{table}
 
-All models are trained using the same architecture as described in Chapter~\ref{chap:architecture}, for \TODO{count} steps.
+All models are trained using the same architecture as described in Section~\ref{sec:architecture}, for \TODO{count} steps.
 To generate the differently encoded inputs, the same base dataset of SVGs for the glyph ``b'' in various font faces is transformed to produce a set of feature vectors for each representation in Table~\ref{tbl:features}.
 The base dataset is then partitioned randomly into 1920 training examples, 240 validation examples, and 240 test examples.
 SVGs whose total number of path commands is greater than 250 are pruned.

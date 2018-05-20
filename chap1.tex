@@ -1,8 +1,16 @@
-%% This is an example first chapter.  You should put chapter/appendix that you
-%% write into a separate file, and add a line \include{yourfilename} to
-%% main.tex, where `yourfilename.tex' is the name of the chapter/appendix file.
-%% You can process specific files by typing their names in at the 
-%% \files=
-%% prompt when you run the file main.tex through LaTeX.
 \chapter{Introduction}
 
+\TODO{hook}
+
+Our motivation for examining the \textit{generation} of designs is two-fold.
+One, we see practical purpose in a recommendation tool that augments a designer's experience, and we believe such a tool would be a valuable addition to a designer's creative process.
+Two, we believe demystifying their generation would further solidify understanding of the intent and structure of human-created designs.
+In algorithmically mimicking the process by which glyphs are created, we hope to gain a deeper grasp of from where humans' notion of design and style arises.
+
+Although many strides have been made in understanding and synthesizing rasterized images and designs, primarily with convolutional neural networks, we focus our investigation on the domain of vectorized images in this work.
+The two representations are quite different, and we aim to both produce generated designs with fewer aesthetically displeasing artifacts as well as investigate what new information about designs' underlying shapes and structures can be quantified and learned with the vectorized data format.
+
+In the next chapter, we provide further background on the domain and discuss related work.
+Then, in the following chapters, we delve into the methods used to train our vector graphics generator on the data processing side as well as the model architecture side.
+We then demonstrate our methods as applied to font glyph generation, using a single-class as well as a multi-class approach.
+Finally, we evaluate our results quantitatively and qualitatively and consider future directions of work.
