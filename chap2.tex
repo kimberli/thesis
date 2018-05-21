@@ -1,21 +1,25 @@
 \chapter{Background}
-The problem space we explore ties together work across a number of different disciplines. In hoping to apply generative methods to vectorized glyphs, we are inspired by previous work in computer vision on non-natural images and draw upon recent developments in generative modeling of line drawings.
+The problem space we explore ties together work across a number of different disciplines, including graphics, graphic design, and machine learning modeling.
+In hoping to apply generative methods to vectorized glyphs, we are inspired by previous work in computer vision on non-natural images and draw upon recent developments in generative modeling of line drawings.
 
 \section{Non-natural images}
-Natural images are photographs of real-world scenes and objects and to date have been the focus of research in many problems in computer vision, including object recognition, scene segmentation, and image generation.
-In contrast, non-natural images are computationally generated, either by hand with a computer design tool or automatically.
+While natural images are photographs of real-world scenes and objects, non-natural images are computationally generated, either by hand with a computer design tool or automatically.
 Images in this category include graphs, pictograms, virtual scenes, graphic designs, and more.
 Algorithmically understanding, summarizing, and synthesizing these images pose unique challenges because of the images' clean and deliberately drawn designs, sometimes multimodal nature, and human-imbued intent. 
 
-Interest in applying computer vision methods to non-natural images is growing.
+While much attention has been focused on research problems like object recognition, scene segmentation, and image recognition on natural images, interest in applying computer vision methods to non-natural images has been growing.
 Much progress has been made towards computationally understanding non-natural images on datasets including XML-encoded scenes~\cite{wu2017neural}, comic strips~\cite{iyyer2016amazing}, and textbook diagrams~\cite{seo2014diagram}.
 Recent work by our group has explored the space of infographics, complex diagrams composed of visual and textual elements that deliver a message~\cite{bylinskii2017understanding}.
-In this work, we focus specifically on human-crafted font faces.
 
 \subsection{Font faces}
-Our computational methods are applied to font faces downloaded from Google Fonts \TODO{cite}. In Figure~\ref{fig:input_fonts}, a sampling of glyphs from the Google Fonts dataset is shown.
+Within the space of non-natural images, we focus specifically on designer-crafted font faces.
+Fonts are used to typeset text with particular styles and weights, and many types of fonts exist, including serif, sans serif, and handwriting style fonts.
+In this work, our computational methods are applied to font faces downloaded from Google Fonts\footnote{Downloaded from \url{https://github.com/google/fonts}, a GitHub repository containing all fonts in the dataset.}. In Figure~\ref{fig:input_fonts}, a sampling of glyphs from the Google Fonts dataset is shown.
 
-As a domain, font glyphs offer certain advantages and pose distinctive challenges. Unlike multimodal infographics and graphic designs, they are drawings essentially composed of simple lines and curves and, as such, can be modeled as sequential drawing commands. \TODO{challenges}
+Within a font face, glyphs generally share the same style in properties like angles, curvature, presence of serifs, and stroke width.
+In the context of computational modeling and generation, font glyphs offer certain advantages and pose distinctive challenges when compared to other types of designed graphics.
+Unlike more complicated designs such as infographics and diagrams, they can essentially be represented as drawings composed of simple lines and curves and, as such, can be modeled using sequential drawing commands.
+However, font glyphs have distinct classes (i.e.\ each letter, number, symbol, etc.\ is a different class) and thus designing a generation procedure that is able to create clearly defined instances of different classes presents a difficult problem.
 
 \begin{figure}[]
 	\includegraphics[width=\textwidth]{figures/input_fonts}
@@ -23,9 +27,19 @@ As a domain, font glyphs offer certain advantages and pose distinctive challenge
 \end{figure}
 
 \subsection{Vector graphics}
-In contrast to raster images, which encode color values for each point (or \textit{pixel}) in an image, vector graphics describe a parameterized set of curves and shapes.
+In this work, we are primarily interested in applying computational models to vector graphics as opposed to raster images.
+While raster images encode color values for each point (or \textit{pixel}) in a two-dimensional grid, vector graphics describe a set of curves and shapes parameterized by mathematical equations and control points.
+Many specifications exist for describing images in vector format, including Scalable Vector Graphics (SVG), Encapsulated PostScript (EPS), and Adobe PDF\@.
+Font faces are often distributed as TrueType (TTF) files, which encode line and curve commands as well as font hints to aid with rendering.
 
-Many specifications exist for describing images in vector format, including Scalable Vector Graphics (SVG), Encapsulated PostScript (EPS), and Adobe PDF.
+Although the focus of our research is on font glyph inputs, our vision is to build a generalizable system for the variety of vector graphics generated by designers.
+Thus, our system accepts SVG data as input, as most vector graphics formats (including TTF) can be expressed using the commands available in the SVG specification.
+
+Applying computer vision techniques to vector graphics raises new challenges.
+While bitmap and vector data can both decode into the same image as viewed by humans, their underlying structures have vast differences (Figure~\ref{fig:svg-a}).
+As a data format, SVGs describe lists of geometric objects (among other elements), including lines, circles, polygons, and splines.
+The SVG \code{path} element, in particular, can be used to create all other element shapes.
+Its attributes describe a series of commands that move from point to point, drawing curves or lines between them, as shown in Figure~\ref{fig:svg-b}.
 
 \begin{figure}[t]
     \subcaptionbox{Raster images are defined as two-dimensional arrays of pixel values, while vector graphics define curves and paths mathematically. Thus, when scaled, vector graphics (right) can still be rendered smoothly while raster images (left) degrade in quality.\label{fig:svg-a}}{\includegraphics[height=1.85in]{figures/b_vs_vec}} \quad
@@ -35,7 +49,8 @@ Many specifications exist for describing images in vector format, including Scal
 
 
 \section{Generative modeling}
-While discriminative modeling methods in machine learning focus on separating and identifying inputs to produce output labels learned from high-dimensional data such as images, generative algorithms create previously unseen instances of a class based on representative inputs.
+To solve the problem of creating novel vector drawings, we look towards the tools provided by generative machine learning methods.
+While discriminative modeling techniques focus on separating and identifying inputs to produce output labels learned from high-dimensional data such as images, generative algorithms create previously unseen instances of a class based on representative inputs.
 They are trained in an unsupervised or semi-supervised manner to model a data distribution $P$, estimating the true data distribution $P_{gt}$ from which samples are drawn.
 By drawing probabilistically from $P$, they can then be used to synthesize novel, unseen examples similar to input data.
 
