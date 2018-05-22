@@ -4,17 +4,22 @@ Thus, our first challenge is to choose an adequate representation that captures 
 Although many different elements are allowed by the SVG specification, we simplify the problem space to focus only on \code{path}s (since \code{path}s can be used to compose other elements anyway). 
 
 \section{Overview of SVG commands}
-There are five commands possible in an SVG \code{path}~\cite{grasso2011svg}:
+There are five commands possible in an SVG \code{path} as seen in Table~\ref{tbl:svg-commands}~\cite{grasso2011svg}:
 
-\begin{enumerate}
-    \item \textbf{Move}: moves the pen to a specified position (\code{m dx dy})
-    \item \textbf{Line}: draws a line from the start to the end position (\code{l dx dy})
-    \item \textbf{Cubic B\'ezier}: draws a cubic curve according to given control points (\code{c dx1 dy1, dx2 dy2, dx dy})
-    \item \textbf{Quadratic B\'ezier}: draws a quadratic curve according to given control point (\code{q dx1 dy1, dx dy})
-    \item \textbf{Arc}: draws a section of an ellipse (\code{a rx ry x-axis-rotation large-arc-flag sweep-flag dx dy})
-\end{enumerate}
+\begin{table}[h]
+\centering
+    \caption[The five possible commands in an SVG \code{path}]{A description of possible SVG path commands. For simplicity, we omit the absolute coordinate variants of the commands, which specify absolute $(x, y)$ coordinates instead of relative $(dx, dy)$.\label{tbl:svg-commands}}
+\begin{tabularx}{\linewidth}{l X l}
+\toprule
+    Command & Description & Code \\ \midrule
+    Move & moves the pen to a specified position & \code{m dx dy} \\
+    Line & draws a line from the start to the end position & \code{l dx dy} \\
+    Quadratic B\'ezier & draws a quadratic curve according to given control point & \code{q dx1 dy1, dx dy} \\
+    Cubic B\'ezier & draws a cubic curve according to given control points & \code{c dx1 dy1, dx2 dy2, dx dy} \\
+    Arc & draws a section of an ellipse & \code{a rx ry t fl fs dx dy}
+\end{tabularx}
+\end{table}
 
-For simplicity, the above enumeration omits the absolute coordinate variants of the previous commands, which specify absolute $(x, y)$ coordinates instead of relative $(dx, dy)$.
 
 \section{Modeling SVGs}
 We would like to model SVG inputs without loss of information about pen movements.
@@ -33,8 +38,9 @@ To constrain the generation process slightly, we first homogenize our dataset by
 There is also variability in the direction of path drawing and in starting positions. Instead of controlling these factors in the preprocessing stage, our architecture is designed for bidirectionality, and all command sequences are prepended such that the pen starts at coordinate $(0, 0)$.
 
 \subsection{Simplifying path commands}
-As seen in our dataset statistics in Section~\ref{sec:font-data}, the most common SVG path command used in our input data is the cubic B\'ezier drawing command, \code{c}, by a large margin.
-To avoid bias and to constrain the problem space (\TODO{wording?}), we instead consolidate the different path commands into a single feature representation.
+We aim to produce a system capable of modeling general SVGs, so inputs can contain all path commands specified in Table~\ref{tbl:svg-commands}.
+To avoid bias and to constrain the problem space (\TODO{wording?}), we consolidate the different path commands into a single feature representation.
+\TODO{this justification makes more sense with the dataset statistics of icons, but fonts use only quadratic beziers--how to better justify why we convert arcs to cubic beziers even though that's not a lossless process?}
 
 Out of the five SVG path commands, three are parametic equations of differing degrees, so we can model these three (lines, quadratic B\'eziers, and cubic B\'eziers) using the parameter space for the highest degree cubic-order equation.
 An elliptical arc segment, on the other hand, cannot be perfectly transformed into a cubic B\'ezier. Arcs have five extra parameters used to describe them ($x$-radius, $y$-radius, angle of rotation, the large arc flag, and the sweep flag), but they occur relatively rarely in the dataset, so it makes sense to approximate them with the same parameter space as used for our parametric commands.
@@ -66,24 +72,22 @@ Some examples of variation are:
 \item \textbf{Pairwise coordinate choice}: if relative, between which points in the curves' coordinate parameters do we measure displacement?
 \end{itemize}
 
-\subsection{Encoding experiment}
+\subsection{Encoding evaluation}
 To investigate the effects of choices for the above questions, we train five models each with a different feature encoding for input and output drawings.
 
 \begin{table}[t]
 \centering
 \caption[Feature encoding variants]{The differences between the five feature representations used for the encoding efficacy experiment. Each feature encoding uses six dimensions for the cubic B\'ezier parameters (two for each point vector) and three for the pen state (pen up, pen down, end drawing). Note that \code{s} represents the start coordinates of the curve, \code{e} represents the end coordinates of the curve, \code{c1} represents the coordinates of the curve's first
-control point, and \code{c2} represents the coordinates of the curve's second control point. \code{disp(a, b)} indicates displacement between points \code{a} and \code{b}, and \code{rot(v)} indicates that vector \code{v} has been applied a transformation to rotate its coordinate axes to be in the \TODO{direction of the previous vector in the encoding}.\label{tbl:features}}
-\begin{minipage}[b]{\linewidth}
+control point, and \code{c2} represents the coordinates of the curve's second control point. \code{disp(a, b)} indicates displacement between points \code{a} and \code{b}, and \code{rot(v)} indicates that vector \code{v} has been applied a transformation to rotate its coordinate axes to be in the direction of the previous vector in the encoding \TODO{wording?}.\label{tbl:features}}
 \begin{tabularx}{\linewidth}{c X}
 \toprule
-encoding & feature vector description \\ \midrule
+Encoding & Feature vector description \\ \midrule
 A & \code{disp(s, e), disp(s, c1), disp(s, c2), pen\_state}\\
 B & \code{disp(s, c1), disp(c1, c2), disp(c2, e), pen\_state}\\
 C & \code{disp(s, e), rot(disp(s, c1)), rot(disp(c2, e)), pen\_state}\\
 D & \code{e, rot(disp(s, c1)), rot(disp(c2, e)), pen\_state}\\
 E & \code{e, c1, c2, pen\_state}\\
 \end{tabularx}
-\end{minipage}
 \end{table}
 
 All models are trained using the same architecture as described in Section~\ref{sec:architecture}, for \TODO{count} steps.
