@@ -100,9 +100,12 @@ Graphs depicting loss during the training process can be found in Appendix~\ref{
 For each of the models, the model iteration with the best validation loss is selected for evaluation.
 Qualitative results from the encoding experiment can be found in Figure~\ref{fig:encodings}.
 
-We evaluate results quantitatively by \TODO{eval!!!!}.
+We evaluate results quantitatively by computing the modified Hausdorff distance between ground-truth images and model-generated images with $\tau = 0.3$, where temperature $\tau$ is defined as in~\cite{ha2017neural} \TODO{cite Hausdorff}.
+
+\TODO{add results table}
 
 \begin{figure}[t]
-	\includegraphics[width=\textwidth]{figures/encodings}
-    \caption[Visual results of training the SVG model with different encodings]{Randomly sampled input-output pairs from the SVG models trained on the five encodings described in Table~\ref{tbl:features}. Decoded outputs were generated at temperature 0.3. Decoded outputs are found on the left, while ground truth inputs are on the right.\label{fig:encodings}}
+    \centering
+	\includegraphics[height=0.8\textheight]{figures/encodings}
+    \caption[Visual results of training the SVG model with different encodings]{Randomly sampled input-output pairs from the SVG models trained on the five encodings described in Table~\ref{tbl:features}. Decoded outputs were generated at temperature 0.3. Decoded outputs are found in the top row for each encoding, while ground truth inputs are in the bottom row.\label{fig:encodings}}
 \end{figure}
