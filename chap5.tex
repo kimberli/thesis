@@ -21,6 +21,68 @@ A breakdown of font types for the 877 font families can be found in Table~\ref{t
 
 All font faces are downloaded as TTF files then converted to SVG format using the FontForge command-line tool\footnote{\url{https://fontforge.github.io}}.
 
+The statistics for the glyph ``b'' across all font faces is shown in Figure~\ref{fig:stats-b}.
+The remaining glyph statistics can be found in Appendix~\ref{app:data}.
+
+\begin{figure}[h]
+\caption[Dataset statistics for the glyph ``b'']
+{Dataset statistics for the glyph ``b'' across all 2552 font faces in the Google Fonts dataset.\label{fig:stats-b}}
+\centering
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``b'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/b_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``b'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/b_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/b_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+\end{figure}
+
 \section{Training}
 \section{Results}
 \subsection{Quantitative results}

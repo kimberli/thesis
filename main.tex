@@ -19,6 +19,8 @@
 \usepackage{tabularx}
 \usepackage{xcolor}
 \usepackage[backend=bibtex,style=ieee,bibencoding=ascii,maxnames=6,minnames=3]{biblatex}
+\usepgfplotslibrary{statistics}
+
 \addbibresource{main.bib}
 
 \newcommand{\TODO}[1]{\textcolor{red}{TODO: #1}}
@@ -26,11 +28,24 @@
 
 
 % for tensorboard graphs, from https://github.com/tensorflow/tensorflow/issues/9024
-\definecolor{tbcolor1}{RGB}{209,27,27}
-\definecolor{tbcolor2}{RGB}{36,123,160}
+\definecolor{color1}{RGB}{209, 27, 27}
+\definecolor{color2}{RGB}{36, 123, 160}
+\definecolor{color3}{RGB}{62, 147, 97}
 \pgfplotscreateplotcyclelist{tb}{
-    semithick,tbcolor1\\%
-    semithick,tbcolor2\\%
+    semithick,color1\\%
+    semithick,color2\\%
+    semithick,color3\\%
+}
+\pgfplotsset{
+	cycle list name=tb,
+	label style={font=\scriptsize},
+	tick label style={font=\tiny},
+ 	legend style={font=\scriptsize},
+	scaled x ticks=false,
+	grid=both,
+	grid style={solid,gray!30!white},
+	axis x line* = bottom,
+	axis y line* = left,
 }
 
 \begin{document}
@@ -47,7 +62,9 @@
 \include{chap7}
 \include{chap8}
 \appendix
-\include{app}
+\include{appa}
+\include{appb}
+\include{appc}
 \begin{singlespace}
 \printbibliography
 \end{singlespace}

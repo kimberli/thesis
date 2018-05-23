@@ -1,0 +1,774 @@
+\chapter{Dataset statistics}\label{app:data}
+\begin{figure}[h]
+\caption[Dataset statistics for other glyphs]
+{Dataset statistics for the remaining glyphs on which our model was trained across all 2552 font faces in the Google Fonts dataset.\label{fig:stats-rem}}
+\centering
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``f'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/f_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``f'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/f_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/f_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``g'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/g_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``g'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/g_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/g_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``o'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/o_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``o'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/o_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/o_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``x'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/x_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``x'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/x_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/x_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``0'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/zero_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``0'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/zero_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/zero_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``1'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/one_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``1'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/one_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/one_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``2'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/two_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``2'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/two_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/two_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``3'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/three_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``3'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/three_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/three_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``4'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/four_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``4'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/four_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/four_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``5'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/five_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``5'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/five_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/five_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``6'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/six_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``6'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/six_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/six_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``7'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/seven_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``7'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/seven_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/seven_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``8'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/eight_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``8'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/eight_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/eight_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={feature vector count},
+	ylabel={number of ``9'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color1,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=300
+    }   
+] table [y index=0] {data/nine_points_stats.csv};
+\end{axis}
+\end{tikzpicture}
+}
+\subcaptionbox*{}
+{\begin{tikzpicture}
+\begin{axis}[
+ 	xlabel={command type count},
+	ylabel={number of ``9'' glyphs},
+	width=0.45\textwidth,
+    ybar,
+    ymin=0
+]
+\addplot [
+	fill=color2,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/nine_line_count.csv};
+\addplot [
+	fill=color3,
+	fill opacity=0.4,
+    hist={
+        bins=7,
+        data min=0.5,
+        data max=100
+    }   
+] table [y index=0] {data/nine_quad_count.csv};
+\addlegendentry{\code{line}}
+\addlegendentry{\code{quad}}
+\end{axis}
+\end{tikzpicture}
+}
+\end{figure}
+
