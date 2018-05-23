@@ -6,4 +6,92 @@
 \newpage
 
 \chapter{Encoding experiment training}\label{app:train-encs}
-\TODO{training graphs from encoding experiment}
+
+\begin{figure}[h]
+\centering
+\subcaptionbox{Cost during training on encoding A}
+{
+    \begin{tikzpicture}
+        \begin{axis}[cycle list name=tb,
+                     scale only axis,
+                     width=0.37\textwidth,
+                     grid=both,
+                     grid style={solid,gray!30!white},
+                     axis lines=bottom,
+                     xlabel={step},
+                     ylabel={training cost},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/enc_a_train_cost.csv};
+        \end{axis}
+    \end{tikzpicture}
+}
+\subcaptionbox{Cost during training on encoding B}
+{
+    \begin{tikzpicture}
+        \begin{axis}[cycle list name=tb,
+                     scale only axis,
+                     width=0.37\textwidth,
+                     grid=both,
+                     grid style={solid,gray!30!white},
+                     axis lines=bottom,
+                     xlabel={step},
+                     ylabel={training cost},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/enc_b_train_cost.csv};
+        \end{axis}
+    \end{tikzpicture}
+}
+\subcaptionbox{Cost during training on encoding C}
+{
+    \begin{tikzpicture}
+        \begin{axis}[cycle list name=tb,
+                     scale only axis,
+                     width=0.37\textwidth,
+                     grid=both,
+                     grid style={solid,gray!30!white},
+                     axis lines=bottom,
+                     xlabel={step},
+                     ylabel={training cost},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/enc_c_train_cost.csv};
+        \end{axis}
+    \end{tikzpicture}
+}
+\subcaptionbox{Cost during training on encoding D}
+{
+    \begin{tikzpicture}
+        \begin{axis}[cycle list name=tb,
+                     scale only axis,
+                     width=0.37\textwidth,
+                     grid=both,
+                     grid style={solid,gray!30!white},
+                     axis lines=bottom,
+                     xlabel={step},
+                     ylabel={training cost},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/enc_d_train_cost.csv};
+        \end{axis}
+    \end{tikzpicture}
+}
+\subcaptionbox{Cost during training on encoding E}
+{
+    \begin{tikzpicture}
+        \begin{axis}[cycle list name=tb,
+                     scale only axis,
+                     width=0.37\textwidth,
+                     grid=both,
+                     grid style={solid,gray!30!white},
+                     axis lines=bottom,
+                     xlabel={step},
+                     ylabel={training cost},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/enc_e_train_cost.csv};
+        \end{axis}
+    \end{tikzpicture}
+}
+\end{figure}

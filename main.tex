@@ -13,6 +13,8 @@
 \usepackage{hyperref}
 \usepackage{lgrind}
 \usepackage{minted}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
 \usepackage{subcaption}
 \usepackage{tabularx}
 \usepackage{xcolor}
@@ -21,6 +23,14 @@
 
 \newcommand{\TODO}[1]{\textcolor{red}{TODO: #1}}
 \newcommand{\code}[1]{\texttt{#1}}
+
+% for tensorboard graphs, from https://github.com/tensorflow/tensorflow/issues/9024
+\definecolor{tbcolor1}{RGB}{209,27,27}
+\definecolor{tbcolor2}{RGB}{0,167,247}
+\pgfplotscreateplotcyclelist{tb}{
+    semithick,tbcolor1\\%
+    semithick,tbcolor2\\%
+}
 
 \begin{document}
 
