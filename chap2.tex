@@ -81,25 +81,35 @@ Often, $P(x|\theta; z) = \mathcal{N}(x|f(\theta; z), \sigma^2 *I)$ where $\sigma
 
 Transforming this objective function to be differentiable and thus trainable using stochastic gradient descent requires a key insight: instead of sampling many $z_i$ then averaging $P(x|z_i)$, we focus only on the $z$ values that are likely to produce $x$ and compute $P(x)$ from those.
 Our encoder then learns $Q_\phi(z|x)$ that approximates $P(z|x)$, while the decoder learns $P_\theta(x|z)$.
-We can then define a loss function derived from Kullback-Leibler divergence $\mathcal{D}$ that describes a variational lower bound:
+We can then define a loss function that describes a variational lower bound, where Kullback-Leibler (KL) divergence $\mathcal{D}$ accounts for the similarity between our $Q_\phi(z|x)$ and the true $P(z)$ and the reconstruction loss accounts for similarity between input and output:
 
 \begin{equation}
-    L_i &= -E_{z\sim Q_\phi(z|x_i)} [\log P_\theta(x_i|z)] + \mathcal{D}(Q_\phi(z|x_i)||P(z))
+    \mathcal{L}_i = -E_{z\sim Q_\phi(z|x_i)} [\log P_\theta(x_i|z)] + \mathcal{D}(Q_\phi(z|x_i)||P(z))
 \end{equation}
 
-\TODO{reference https://jaan.io/what-is-variational-autoencoder-vae-tutorial/}
-
-In~\cite{graves2013generating}, this VAE model is expanded to learn sequential inputs and outputs. \TODO{explain VAE + RNN}
+In~\cite{graves2013generating}, the reconstruction loss function is expanded to account for sequential inputs and outputs, combining log loss for each item in the sequence.
+This adjusted reconstruction loss can be used in a recurrent VAE architecture, where encoders and decoders digest sequential data.
 
 \section{Related work}
-In our work, we build upon the variational autoencoder method presented by Ha \textit{et al.} in~\cite{ha2017neural}.
+Our end-to-end SVG generation model is inspired by prior work in line drawing generation, as both domains share an underlying temporal data structure.
+Furthermore, our application to font generation is preceded by a history of computational approaches to font parameterization and style classification.
 
 \subsection{Generating drawings}
-\TODO{UToronto handwriting generation}
+Unconditionally generating parameterized curves extends the established problems of polyline generation and procedural generation.
+Thus, we look towards contributions in handwriting and sketch generation, such as Graves's RNN-based handwriting prediction and synthesis work~\cite{graves2013generating}.
+DRAW, a system introduced in~\cite{gregor2015draw}, uses a pair of recurrent networks in an VAE architecture to model attention in MNIST character generation.
+Recent work by \citeauthor{ganin2017synthesizing} uses a reinforcement-learning approach to train an agent to draw sketches.
 
-\TODO{DRAW}
-
-\TODO{SPIRAL}
+Polyline results can easily be vectorized to produce splines, as in~\cite{janssen1997adaptive} or~\cite{birdal2014novel}.
+However, our approach aims to model the entire SVG input to directly produce ready-to-edit spline output.
+In our work, we build upon the variational autoencoder method presented by~\citeauthor{ha2017neural} in~\cite{ha2017neural}.
+We use a similar bidirectional sequence-to-sequence VAE, with an overall loss calculation that includes drawing location losses, pen state losses, and KL loss.
 
 \subsection{Font style}
-\TODO{Learning a Manifold of Fonts}
+\citeauthor{knuth1979tex}'s Metafont format demonstrates pioneering work in font style parameterization and has since motivated high-level font classification systems with font faces parameterized by human-controlled features like curvature and stroke width~\cite{knuth1979tex}\cite{lau2009learning}\cite{hassan2010next}.
+
+Outside of manual feature selection approaches, many existing methods for modeling font style use font glyph raster images.
+Tenenbaum and Freeman present an method for modeling style and content separately and apply it to font style extrapolation~\cite{tenenbaum1997separating}.
+In~\cite{campbell2014learning}, polyline outlines are used to match glyphs across fonts using an energy optimization process, resulting in a learned manifold of fonts from which novel styles can be sampled.
+Approaches for learning stylized calligraphy, such as~\cite{xu2005automatic}, take a more procedural approach, where strokes within characters are first extracted using shape segmentation approaches before use in training.
+Neural network and VAE techniques to learning font style are increasingly common, such as in~\cite{upchurch2016z} and~\cite{wang2015deepfont}, and \citeauthor{lian2016automatic} use a combination of stroke segmentation and feature learning to generate handwriting fonts for Chinese characters~\cite{lian2016automatic}.
