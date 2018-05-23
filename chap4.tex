@@ -1,4 +1,4 @@
-\chapter{Model architecture}
+\chapter{Model architecture}\label{chap:architecture}
 For our end-to-end SVG generation method, we build upon the work of~\citeauthor{ha2017neural} and use a similar bidirectional sequence-to-sequence variational autoencoder model~\cite{ha2017neural}.
 We maintain a similar encoder and latent space architecture, but we modify the decoder to output parameters to four probability distributions instead of two: three Gaussian Mixture Models (GMMs) represent the three coordinates in the feature vectors, and one categorical distribution is used for modeling the pen state.
 An overview of the model architecture is depicted in Figure~\ref{fig:architecture}.

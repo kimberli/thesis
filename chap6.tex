@@ -8,7 +8,7 @@ Some examples of variation are:
 \item \textbf{Pairwise coordinate choice}: if relative, between which points in the curves' coordinate parameters do we measure displacement?
 \end{itemize}
 
-\section{Evaluating feature encodings}
+\section{Evaluating feature encodings}\label{sec:eval-encs}
 To investigate the effects of choices for the above questions, we train five models each with a different feature encoding for input and output drawings. Code for generating each encoding can be found in Figure~\ref{appfig:features-code}.
 
 \begin{table}[t]
@@ -32,7 +32,7 @@ All models are trained using the same architecture as described in Section~\ref{
 To generate the differently encoded inputs, the same base dataset of SVGs for the glyph ``b'' in various font faces is transformed to produce a set of feature vectors for each representation in Table~\ref{tbl:features}.
 The base dataset is then partitioned randomly into 1920 training examples, 240 validation examples, and 240 test examples.
 SVGs whose total number of path commands is greater than 250 are pruned.
-Graphs depicting loss during the training process can be found in Tabel~\ref{apptbl:train-encs}.
+Graphs depicting loss during the training process can be found in Figure~\ref{appfig:train-encs}, and test costs for each selected model are reported in Tabel~\ref{apptbl:train-encs}.
 
 \section{Results}
 For each of the models, the model iteration with the best validation loss is selected for evaluation.
@@ -49,7 +49,7 @@ Evaluation is run on a set of 240 test images, and quantitative results can be f
 \toprule
     Encoding & Mean & Std.\ dev. & Kurtosis \\ \midrule
     A & 28.7707 & 11.9332 & 1.3354 \\
-    B & 19.5341 & 8.3484 & 1.9515 \\
+    B \TODO{recompute} & 19.5341 & 8.3484 & 1.9515 \\
     C & 24.8122 & 14.5086 & 17.9476 \\
     D & 15.9723 & 7.6134 & 0.9394 \\
     E & 16.7207 & 7.1926 & 0.8920 \\
@@ -65,7 +65,9 @@ Still, encodings B and D seem to result in the glyphs most visually similar to g
 \begin{figure}[t]
     \centering
 	\includegraphics[height=0.8\textheight]{figures/encodings}
-    \caption[Visual results of training the SVG model with different encodings]{Randomly sampled input-output pairs from the SVG models trained on the five encodings described in Table~\ref{tbl:features}.
+    \caption[Visual results of training the SVG model with different encodings]
+    {Randomly sampled input-output pairs from the SVG models trained on the five encodings described in Table~\ref{tbl:features}.
+    \TODO{resample B}
     Decoded outputs were generated at temperature 0.3.
     Decoded outputs are found in the top row for each encoding, while ground truth inputs are in the bottom row.\label{fig:encodings}}
 \end{figure}

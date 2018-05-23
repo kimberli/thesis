@@ -72,11 +72,11 @@ def enc_E(bez, next_state):
 \clearpage
 \newpage
 
-\chapter{Training graphs}\label{app:train}
+\chapter{Training}\label{app:train}
 
 \begin{figure}[h]
 \centering
-\caption{Training costs for encodings listed in Table~\ref{tbl:features}\label{apptbl:train-encs}}
+    \caption[Training and validation costs for model encoding experiment]{Training and validation costs for encodings listed in Table~\ref{tbl:features}. Training cost is the red series, and validation cost is the blue series.\label{appfig:train-encs}}
 \subcaptionbox{Encoding A}
 {
     \begin{tikzpicture}
@@ -94,6 +94,7 @@ def enc_E(bez, next_state):
                      x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
                      y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
           \addplot table [x=Step, y=Value, col sep=comma] {data/enc_a_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/enc_a_valid_cost.csv};
         \end{axis}
     \end{tikzpicture}
 }
@@ -114,6 +115,7 @@ def enc_E(bez, next_state):
                      x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
                      y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
           \addplot table [x=Step, y=Value, col sep=comma] {data/enc_b_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/enc_b_valid_cost.csv};
         \end{axis}
     \end{tikzpicture}
 }
@@ -134,6 +136,7 @@ def enc_E(bez, next_state):
                      x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
                      y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
           \addplot table [x=Step, y=Value, col sep=comma] {data/enc_c_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/enc_c_valid_cost.csv};
         \end{axis}
     \end{tikzpicture}
 }
@@ -154,6 +157,7 @@ def enc_E(bez, next_state):
                      x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
                      y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
           \addplot table [x=Step, y=Value, col sep=comma] {data/enc_d_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/enc_d_valid_cost.csv};
         \end{axis}
     \end{tikzpicture}
 }
@@ -174,7 +178,26 @@ def enc_E(bez, next_state):
                      x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
                      y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
           \addplot table [x=Step, y=Value, col sep=comma] {data/enc_e_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/enc_e_valid_cost.csv};
         \end{axis}
     \end{tikzpicture}
 }
 \end{figure}
+
+\begin{table}
+\centering
+    \caption[Training results for models in encoding experiment]{Training results  and validation costs for models in encoding experiment described in Section~\ref{sec:eval-encs}.
+    Each model was trained for 125k iterations on the ``b'' dataset partitioned into 1920 training, 240 test, and 240 validation examples, with the default parameters described in Chapter~\ref{chap:training}.
+    Models were run against the validation set every 5k iterations, and the model with the best validation cost is reported and used to evaluate its encoding.
+    We also report the overall, KL, and reconstruction costs of the selected model for each encoding on the test set.
+    \label{apptbl:train-encs}}
+\begin{tabular}{c c c c c}
+\toprule
+    Encoding & Best model iteration & Test cost & Test KL cost & Test R cost \\ \midrule
+    A & 80k & -1.428 & 0.3350 & -1.431 \\
+    B & 110k & -1.724 & 0.5614 & -1.729 \\
+    C & 110k & -1.478 & 0.4631 & -1.483 \\
+    D & 115k & -2.182 & 0.4391 & -2.186 \\
+    E & 25k & -1.466 & 0.5928 &  -1.472
+\end{tabular}
+\end{table}
