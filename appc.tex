@@ -1,5 +1,133 @@
 \chapter{Training}\label{app:train}
 
+\begin{table}[h]
+\centering
+    \caption[Training results for the single-glyph models]{Training results  and validation costs for single-glyph models described in Chapter~\ref{chap:training}.
+    Models were run against the validation set every 5k iterations, and the model with the best validation cost is reported.
+    We also report the overall, KL, and reconstruction costs of the selected model for each encoding on the test set.
+    \label{apptbl:train-models}}
+\begin{tabularx}{\textwidth}{c c X c c c}
+\toprule
+    Glyph & Iterations trained & Best model iteration & Test cost & Test KL cost & Test R cost \\ \midrule
+    \textbf{b} & 610k & 105k & -1.830 & 0.5585 & -1.836 \\
+    \textbf{f} & 573k & 205k & -1.669 & 0.4151 & -1.673 \\
+    \textbf{g} & 471k & 65k & -2.075 & 0.7274 & -2.082 \\
+    \textbf{o} & 438k & 280k & -1.733 & 0.2448 & -1.736 \\
+    \textbf{x} & 566k & 60k & -1.055 & 0.2946 & -1.058 \\
+\end{tabularx}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\caption[Training and validation costs for the single-glyph models]
+{Training and validation costs for the models trained in Chapter~\ref{chap:training}.\label{appfig:train-models}}
+\subcaptionbox{Glyph \textbf{b}}
+{
+    \begin{tikzpicture}
+        \begin{axis}[scale only axis,
+                     width=0.35\textwidth,
+                     xlabel={step},
+                     ylabel={training cost},
+                     label style={font=\scriptsize},
+                     tick label style={font=\tiny},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/font_b_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/font_b_valid_cost.csv};
+		\addlegendentry{train}
+		\addlegendentry{valid}
+        \end{axis}
+    \end{tikzpicture}
+}
+\subcaptionbox{Glyph \textbf{f}}
+{
+    \begin{tikzpicture}
+        \begin{axis}[scale only axis,
+                     width=0.35\textwidth,
+                     xlabel={step},
+                     ylabel={training cost},
+                     label style={font=\scriptsize},
+                     tick label style={font=\tiny},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/font_f_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/font_f_valid_cost.csv};
+		\addlegendentry{train}
+		\addlegendentry{valid}
+        \end{axis}
+    \end{tikzpicture}
+}
+\subcaptionbox{Glyph \textbf{g}}
+{
+    \begin{tikzpicture}
+        \begin{axis}[scale only axis,
+                     width=0.35\textwidth,
+                     xlabel={step},
+                     ylabel={training cost},
+                     label style={font=\scriptsize},
+                     tick label style={font=\tiny},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/font_g_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/font_g_valid_cost.csv};
+		\addlegendentry{train}
+		\addlegendentry{valid}
+        \end{axis}
+    \end{tikzpicture}
+}
+\subcaptionbox{Glyph \textbf{o}}
+{
+    \begin{tikzpicture}
+        \begin{axis}[scale only axis,
+                     width=0.35\textwidth,
+                     xlabel={step},
+                     ylabel={training cost},
+                     label style={font=\scriptsize},
+                     tick label style={font=\tiny},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/font_o_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/font_o_valid_cost.csv};
+		\addlegendentry{train}
+		\addlegendentry{valid}
+        \end{axis}
+    \end{tikzpicture}
+}
+\subcaptionbox{Glyph \textbf{x}}
+{
+    \begin{tikzpicture}
+        \begin{axis}[scale only axis,
+                     width=0.35\textwidth,
+                     xlabel={step},
+                     ylabel={training cost},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/font_x_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/font_x_valid_cost.csv};
+		\addlegendentry{train}
+		\addlegendentry{valid}
+        \end{axis}
+    \end{tikzpicture}
+}
+\end{figure}
+
+\begin{table}[h]
+\centering
+    \caption[Training results for models in encoding experiment]{Training results  and validation costs for models in encoding experiment described in Section~\ref{sec:eval-encs}.
+    Each model was trained for 125k iterations on the \textbf{b} dataset partitioned into 1920 training, 240 test, and 240 validation examples, with the default parameters described in Chapter~\ref{chap:training}.
+    Models were run against the validation set every 5k iterations, and the model with the best validation cost is reported and used to evaluate its encoding.
+    \label{apptbl:train-encs}}
+\begin{tabular}{c c c c c}
+\toprule
+    Encoding & Best model iteration & Test cost & Test KL cost & Test R cost \\ \midrule
+    A & 80k & -1.428 & 0.3350 & -1.431 \\
+    B & 110k & -1.724 & 0.5614 & -1.729 \\
+    C & 110k & -1.478 & 0.4631 & -1.483 \\
+    D & 115k & -2.182 & 0.4391 & -2.186 \\
+    E & 25k & -1.466 & 0.5928 &  -1.472
+\end{tabular}
+\end{table}
+
 \begin{figure}[h]
 \centering
     \caption[Training and validation costs for model encoding experiment]{Training and validation costs for encoding models listed in Table~\ref{tbl:features}.\label{appfig:train-encs}}
@@ -7,7 +135,7 @@
 {
     \begin{tikzpicture}
         \begin{axis}[scale only axis,
-                     width=0.25\textwidth,
+                     width=0.35\textwidth,
                      xlabel={step},
                      ylabel={training cost},
                      label style={font=\scriptsize},
@@ -25,7 +153,7 @@
 {
     \begin{tikzpicture}
         \begin{axis}[scale only axis,
-                     width=0.25\textwidth,
+                     width=0.35\textwidth,
                      xlabel={step},
                      ylabel={training cost},
                      label style={font=\scriptsize},
@@ -43,7 +171,7 @@
 {
     \begin{tikzpicture}
         \begin{axis}[scale only axis,
-                     width=0.25\textwidth,
+                     width=0.35\textwidth,
                      xlabel={step},
                      ylabel={training cost},
                      label style={font=\scriptsize},
@@ -61,7 +189,7 @@
 {
     \begin{tikzpicture}
         \begin{axis}[scale only axis,
-                     width=0.25\textwidth,
+                     width=0.35\textwidth,
                      xlabel={step},
                      ylabel={training cost},
                      label style={font=\scriptsize},
@@ -79,7 +207,7 @@
 {
     \begin{tikzpicture}
         \begin{axis}[scale only axis,
-                     width=0.25\textwidth,
+                     width=0.35\textwidth,
                      xlabel={step},
                      ylabel={training cost},
                      x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
@@ -92,22 +220,3 @@
     \end{tikzpicture}
 }
 \end{figure}
-
-\begin{table}
-\centering
-    \caption[Training results for models in encoding experiment]{Training results  and validation costs for models in encoding experiment described in Section~\ref{sec:eval-encs}.
-    Each model was trained for 125k iterations on the ``b'' dataset partitioned into 1920 training, 240 test, and 240 validation examples, with the default parameters described in Chapter~\ref{chap:training}.
-    Models were run against the validation set every 5k iterations, and the model with the best validation cost is reported and used to evaluate its encoding.
-    We also report the overall, KL, and reconstruction costs of the selected model for each encoding on the test set.
-    \label{apptbl:train-encs}}
-\begin{tabular}{c c c c c}
-\toprule
-    Encoding & Best model iteration & Test cost & Test KL cost & Test R cost \\ \midrule
-    A & 80k & -1.428 & 0.3350 & -1.431 \\
-    B & 110k & -1.724 & 0.5614 & -1.729 \\
-    C & 110k & -1.478 & 0.4631 & -1.483 \\
-    D & 115k & -2.182 & 0.4391 & -2.186 \\
-    E & 25k & -1.466 & 0.5928 &  -1.472
-\end{tabular}
-\end{table}
-
