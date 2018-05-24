@@ -49,7 +49,7 @@ Evaluation is run on a set of 240 test images, and quantitative results can be f
 \toprule
     Encoding & Mean & Std.\ dev. & Kurtosis \\ \midrule
     A & 28.7707 & 11.9332 & 1.3354 \\
-    B \TODO{recompute} & 19.5341 & 8.3484 & 1.9515 \\
+    B & 15.4189 & 8.4912 & 3.1740 \\
     C & 24.8122 & 14.5086 & 17.9476 \\
     D & 15.9723 & 7.6134 & 0.9394 \\
     E & 16.7207 & 7.1926 & 0.8920 \\
@@ -67,7 +67,6 @@ Still, encodings B and D seem to result in the glyphs most visually similar to g
 	\includegraphics[height=0.8\textheight]{figures/encodings}
     \caption[Visual results of training the SVG model with different encodings]
     {Randomly sampled input-output pairs from the SVG models trained on the five encodings described in Table~\ref{tbl:features}.
-    \TODO{resample B}
     Decoded outputs were generated at temperature 0.3.
     Decoded outputs are found in the top row for each encoding, while ground truth inputs are in the bottom row.\label{fig:encodings}}
 \end{figure}
