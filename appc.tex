@@ -4,7 +4,7 @@
 \centering
     \caption[Training results for the single-glyph models]{Training results  and validation costs for single-glyph models described in Chapter~\ref{chap:training}.
     Models were run against the validation set every 5k iterations, and the model with the best validation cost is reported.
-    We also report the overall, KL, and reconstruction costs of the selected model for each encoding on the test set.
+    We also report the overall, KL, and reconstruction costs of the best-performing model for each encoding on the test set.
     \label{apptbl:train-models}}
 \begin{tabularx}{\textwidth}{c c X c c c}
 \toprule
@@ -220,3 +220,62 @@
     \end{tikzpicture}
 }
 \end{figure}
+
+\begin{table}[h]
+\centering
+    \caption[Training results for the multi-class digit glyph models]{Training results and validation costs for multi-glyph models described in Chapter~\ref{chap:style}.
+    Models were run against the validation set every 5k iterations, and the model with the best validation cost is reported.
+    Both models were trained for 450k iterations.
+    We also report the overall, KL, and reconstruction costs of the best performing iteration for each encoding on the test set.
+    Note that the modified classifying model includes a $L_c$ term in its cost to account for classification log loss.
+    \label{apptbl:train-style}}
+\begin{tabularx}{\textwidth}{c c X c c c}
+\toprule
+    Model & Best model iteration & Test cost & Test KL cost & Test R cost \\ \midrule
+    Original & 430k & -1.946 & 0.3275 & -1.970 \\
+    Modified & 405k & -0.9495 & 0.2143 & -2.429 \\
+\end{tabularx}
+\end{table}
+
+\begin{figure}[h]
+\centering
+    \caption[Training and validation costs for the multi-class digit glyph models]
+    {Training and validation costs for multi-glyph models described in Chapter~\ref{chap:style}.\label{appfig:train-style}}
+\subcaptionbox{Original model}
+{
+    \begin{tikzpicture}
+        \begin{axis}[scale only axis,
+                     width=0.35\textwidth,
+                     xlabel={step},
+                     ylabel={training cost},
+                     label style={font=\scriptsize},
+                     tick label style={font=\tiny},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/digits_basic_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/digits_basic_valid_cost.csv};
+        \addlegendentry{train}
+        \addlegendentry{valid}
+        \end{axis}
+    \end{tikzpicture}
+}
+\subcaptionbox{Classifying model}
+{
+    \begin{tikzpicture}
+        \begin{axis}[scale only axis,
+                     width=0.35\textwidth,
+                     xlabel={step},
+                     ylabel={training cost},
+                     label style={font=\scriptsize},
+                     tick label style={font=\tiny},
+                     x label style={at={(axis description cs:0.5,-0.1)},anchor=north},
+                     y label style={at={(axis description cs:-0.1,.5)},anchor=south},]
+          \addplot table [x=Step, y=Value, col sep=comma] {data/digits_labels2_train_cost.csv};
+          \addplot table [x=Step, y=Value, col sep=comma] {data/digits_labels2_valid_cost.csv};
+        \addlegendentry{train}
+        \addlegendentry{valid}
+        \end{axis}
+    \end{tikzpicture}
+}
+\end{figure}
+

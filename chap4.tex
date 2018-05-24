@@ -6,7 +6,7 @@ An overview of the model architecture is depicted in Figure~\ref{fig:architectur
 \section{VAE modules}
 Dual RNNs are used in the encoder module, one for forward and one for backward sequences of feature vectors, with each feature vector representing a single SVG command.
 Both RNNs use LSTM cells with layer normalization, as introduced in~\cite{ba2016layer}.
-After transforming an input SVG into a sequence of feature vectors $S = (S_1, S_2, \cdots, S_n)$, each $S_i$ is passed in to the encoder RNNs in the appropriate order.
+After transforming an input SVG into a sequence of feature vectors $S = (S_1, S_2, \cdots, S_n)$ which includes padding with \textit{end drawing} vectors to ensure $S$ is length $n_\text{max}$, each $S_i$ is passed in to the encoder RNNs in the appropriate order.
 The final hidden states of both RNNs, $h_\leftarrow$ from the backward encoder and $h_\to$ from the forward encoder, are concatenated to form a combined output $h$.
 Assuming the latent space vector has dimension $n_z$, this output is then transformed into $\mu$ and $\sigma$ vectors using a fully connected layer (and an exponentiation operation to produce a non-negative $\sigma$) such that both vectors have dimension $n_z$.
 
