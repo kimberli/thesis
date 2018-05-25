@@ -1,73 +1,10 @@
-\chapter{Algorithms}\label{app:enc}
-
-\begin{figure}[h]
-    \caption{Code for generating encodings described in Table~\ref{tbl:features}\label{appfig:features-code}}
-\begin{minted}{python}
-"""
-vec[0] = d1.x
-vec[1] = d1.y
-vec[2] = d2.x
-vec[3] = d2.x
-vec[4] = d3.x
-vec[5] = d3.x
-vec[6] = pen_down
-vec[7] = pen_up
-vec[8] = end
-"""
-def rotate(pt, theta):
-    new_x = pt.real * math.cos(theta) - pt.imag * math.sin(theta)
-    new_y = pt.real * math.sin(theta) + pt.imag * math.cos(theta)
-    return Point(new_x, new_y)
-
-def enc_A(bez, next_state):
-    result = np.zeros(NUM_DIM)
-    set_vec_state(result, next_state)
-    set_d1(result, bez.end - bez.start)
-    set_d2(result, bez.c1 - bez.start)
-    set_d3(result, bez.c2 - bez.start)
-    return result
-\end{minted}
-\end{figure}
-
-\begin{figure}[h]
-\begin{minted}{python}
-def enc_B(bez, next_state):
-    result = np.zeros(NUM_DIM)
-    set_vec_state(result, next_state)
-    set_d1(result, bez.c1 - bez.start)
-    set_d2(result, bez.c2 - bez.c1)
-    set_d3(result, bez.end - bez.c2)
-    return result
-
-def enc_C(bez, next_state):
-    result = np.zeros(NUM_DIM)
-    set_vec_state(result, next_state)
-    disp = bez.end - bez.start
-    theta = math.atan2(disp.y, disp.x)
-    set_d1(result, disp)
-    set_d2(result, rotate(bez.c1 - bez.start, theta))
-    set_d3(result, rotate(bez.end - bez.c2, theta))
-    return result
-
-def enc_D(bez, next_state):
-    result = np.zeros(NUM_DIM)
-    set_vec_state(result, next_state)
-    disp = bez.end - bez.start
-    theta = math.atan2(disp.y, disp.x)
-    set_d1(result, bez.end)
-    set_d2(result, rotate(bez.c1 - bez.start, -theta))
-    set_d3(result, rotate(bez.end - bez.c2, -theta))
-    return result
-
-def enc_E(bez, next_state):
-    result = np.zeros(NUM_DIM)
-    set_vec_state(result, next_state)
-    set_d1(result, bez.end)
-    set_d2(result, bez.c1)
-    set_d3(result, bez.c2)
-    return result
-\end{minted}
-\end{figure}
-
-\clearpage
-\newpage
+\chapter{Algorithms}\label{app:algs}
+\begin{enumerate}
+    \item Extract the arc parameters: start coordinates, end coordinates, ellipse major and minor radii, rotation angle from $x$ and $y$ axes, large arc flag, and sweep flag. 
+    \item Transform ellipse into unit circle by rotating, scaling, and translating, and save those transformation factors.
+    \item Find the arc angle from the transformed start point to end point on the unit circle.
+    \item If needed, split the arc into segments, each covering an angle less than $90^\circ$.
+    \item Approximate each segment angle's arc on a unit circle such that the distance from the circle center to the arc along the angle bisector of the arc is equal to the radius, defining cubic B\'ezier control points.
+	\item Invert the transformation above to convert arcs along the unit circle back to the elliptical arc, transforming the generated control points accordingly.
+	\item Use these transformed control points to parameterize the output cubic B\'ezier curve.
+\end{enumerate}
