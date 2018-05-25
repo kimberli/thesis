@@ -8,7 +8,7 @@ Some examples of variation are:
 \item \textbf{Pairwise coordinate choice}: if relative, between which points in the curves' coordinate parameters do we measure displacement?
 \end{itemize}
 
-Here, we report results of an experiment in which we find that alternative forms of our feature adaptation process have varying ``learnability''; training differently transformed inputs with the same model architecture produces outputs of varying quality.
+Here, we report results of an experiment in which we find that alternative forms of our feature adaptation process have varying ``learnability'': training differently transformed inputs with the same model architecture produces outputs of varying quality.
 
 \section{Evaluating feature encodings}\label{sec:eval-encs}
 To investigate the effects of choices for the above questions, we train five models each with a different feature encoding for input and output drawings.
@@ -17,7 +17,7 @@ Code for generating each encoding can be found in Appendix~\ref{app:enc}.
 \begin{table}[t]
 \centering
 \caption[Feature encoding variants]{The differences between the five feature representations used for the encoding efficacy experiment.
-    Each feature encoding uses six dimensions for the cubic B\'ezier parameters (two for each point vector) and three for the pen state (pen up, pen down, end drawing).
+    Each feature encoding uses six dimensions for the cubic B\'ezier parameters (two for each point vector) and three for the pen state (\textit{pen up}, \textit{pen down}, \textit{end drawing}).
     Note that \code{s} represents the start coordinates of the curve, \code{e} represents the end coordinates of the curve, \code{c1} represents the coordinates of the curve's first control point, and \code{c2} represents the coordinates of the curve's second control point.
     \code{disp(a, b)} indicates displacement between points \code{a} and \code{b}, and \code{rot(v)} indicates that vector \code{v} has been rotated such that its coordinates are in the direction of the previous vector in the encoding.\label{tbl:features}}
 \begin{tabularx}{\linewidth}{c X}

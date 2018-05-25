@@ -46,9 +46,11 @@ Although the focus of our research is on font glyph inputs, our vision is to bui
 Thus, our system accepts SVG data as input, as most vector graphics formats (including TTF) can be expressed using the commands available in the SVG specification.
 
 \begin{figure}[t]
-    \subcaptionbox{Raster images are defined as two-dimensional arrays of pixel values, while vector graphics define curves and paths mathematically. When scaled, vector graphics (right half) can still be rendered smoothly while raster images (left half) degrade in quality.\label{fig:svg-a}}
+    \subcaptionbox{Raster images are defined as two-dimensional arrays of pixel values, while vector graphics define curves and paths mathematically. When scaled up, vector graphics (right half) can still be rendered smoothly while raster images (left half) degrade in quality.\label{fig:svg-a}}
     {\includegraphics[height=1.85in]{figures/b_vs_vec}} \quad
-    \subcaptionbox{SVG is an XML-based markup language that describes geometric elements within a vector image. A single path is used to draw this soap bubble, and colored curves in the image correspond approximately to the highlighted attribute commands that describe them. For example, the command \code{l-0.69-1.32} indicates a line drawn from a starting point to a point 0.69 units to the left and 1.32 units down.\label{fig:svg-b}}
+    \subcaptionbox{SVG is an XML-based markup language that describes geometric elements within a vector image.
+    A single path is used to draw this soap bubble, and colored curves in the image correspond approximately to the highlighted attribute commands that describe them.
+    For example, the command \code{l-0.69-1.32} indicates a line drawn from a starting point to a point 0.69 units to the left and 1.32 units up.\label{fig:svg-b}}
     {\includegraphics[height=1.85in]{figures/svgs}}
     \caption[An overview of vector graphics and Scalable Vector Graphics (SVG)]
     {A visual comparison of raster and vector graphics, and a sample SVG path.
@@ -58,7 +60,7 @@ Thus, our system accepts SVG data as input, as most vector graphics formats (inc
 \subsubsection{Modeling vector graphics}
 Applying computer vision techniques to vector graphics raises new challenges.
 While bitmap and vector data can both decode into the same visual output, their underlying encoding structures have vast differences (Figure~\ref{fig:svg-a}).
-As a data format, SVGs describe lists of geometric objects (among other elements such as text which are outside the scope of this work), including lines, circles, polygons, and splines.
+As a data format, SVGs describe lists of geometric objects, including lines, circles, polygons, and splines, among other elements such as text which are outside the scope of this work.
 The SVG \code{path} element, in particular, can be used to create all other element shapes.
 Its attributes describe a series of commands that move from point to point, drawing curves or lines between them, as shown in Figure~\ref{fig:svg-b}.
 
