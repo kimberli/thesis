@@ -1,19 +1,23 @@
 \chapter{Style and content}\label{chap:style}
-Although the model presented in Chapter~\ref{chap:architecture} learns to model SVGs from a single class, it encodes style and content together in its latent space.
-Here, we investigate a modified classifying architecture that explicitly encodes content separately and report experiment results.
+Although the model presented in Chapter~\ref{chap:architecture} learns to model SVGs from a single class, training on a multi-class dataset forces it to encode style and class together in its latent space.
+Here, we investigate a modified architecture that explicitly encodes style and class separately.
+We report experiment results and demonstrate applications in classification and style transfer.
 
-\section{Model architecture}
 \begin{figure}[h]
 \centering
-\caption[An overview of the SVG model architecture with explicit label encoding]{An overview of the SVG model architecture with explicit label encoding.
+\caption[An overview of the SVG model architecture with explicit label encoding]
+    {An overview of the SVG model architecture with explicit label encoding.
+    The differences between this figure and Figure~\ref{fig:architecture} are highlighted in red.
 \label{fig:label-arch}}
 \includegraphics[width=\textwidth]{figures/label_architecture}
 \end{figure}
 
+\section{Model architecture}\label{sec:mod-arch}
+
 The model presented originally transforms the final layer of the encoder RNN into $\mu$ and $\sigma$ vectors, which are then combined with random $\mathcal{N}(0,1)$ samples to form a latent space vector $z$.
 
 We modify this architecture to also generate a label vector $z_l$ from the encoder's final layer that models a categorical distribution over input classes.
-Assuming there are $n_c$ input classes and a latent space dimension of $n_z$, we adjust $\mu$ and $\sigma$ to be of dimension $n_z - n_c$, then perform the same transformation to generate $z_s$.
+Assuming there are $n_c$ input classes and a latent space dimension of $n_z$, we adjust $\mu$ and $\sigma$ to be of dimension $n_z - n_c$, then perform the original transformation from $\mu$ and $\sigma$ to generate what we now denote as $z_s$.
 We concatenate these two vectors, $z_l$ and $z_s$, to form $z$, which is then fed into the decoder as before.
 
 Finally, we add another term in the loss function representing the log loss of the label prediction with the ground truth label (encoded as a $n_c$-dimensional one-hot vector).
@@ -24,19 +28,19 @@ L_c = \sum_{i=1}^c c_i \log(z_{li})
 \end{equation}
 
 \section{Classifying experiment}
-\begin{figure}[h]
-    \centering
-	\includegraphics[width=\textwidth]{figures/digits}
-    \caption[Visual results for the multi-class digits models]
-    {Selected conditionally generated digits from the models in Section~\ref{sec:class-exp} trained on a multi-class dataset.\label{fig:class-results}}
-\end{figure}
-
-We perform an experiment comparing two models: one version of the original model and one version of the classifying model.
+We perform an experiment comparing two models: one version of the original model and one version of the modified classification model.
 To generate a multi-class dataset, we combine datasets for the digit glyphs (i.e. digits 0 through 9).
 Input SVGs are encoded using encoding B as described in Chapter~\ref{chap:feature-variation}.
 Overall, the resulting dataset has 20k training examples, 2.4k test examples, and 2.4k validation examples.
 
 Both models were trained for 450k iterations with the same parameters as models described in Chapter~\ref{chap:training}, and details about training loss can be found in Appendix~\ref{app:train}.
+
+\begin{figure}[h]
+    \centering
+	\includegraphics[width=\textwidth]{figures/digits}
+    \caption[Visual results for the multi-class digits models]
+    {Selected conditionally generated digits from the original model in Chapter~\ref{chap:architecture} and the modified model presented in Section~\ref{sec:mod-arch} trained on a multi-class digits dataset.\label{fig:class-results}}
+\end{figure}
 
 \section{Results}
 In conditionally recreating input images, we find that the models are comparable, with the original model performing slightly better in quantitative evaluation. Selected decoded outputs from both models are shown in Figure~\ref{fig:class-results}.
@@ -44,16 +48,23 @@ In conditionally recreating input images, we find that the models are comparable
 \begin{table}[h]
 \centering
 \caption[Quantitative results for evaluating multi-class models]
-    {Modified Hausdorff distance for models trained on the digit glyph dataset with each encoding on a test set of $N$ images.\label{tbl:class-results}}
+    {Modified Hausdorff distance for models trained on the digit glyph dataset with each encoding on a test set of $N$ images.
+    We include two baselines: one comparing every input digit image against random noise of the same image dimensions, and one comparing randomly selected pairs of input images.
+    \label{tbl:class-results}}
 \begin{tabular}{c c c c c}
 \toprule
-    Model & Mean & Std.\ dev. & Kurtosis & $N$ \\ \midrule
+    Model & Mean & Std.\ dev. & Kurtosis & $N$ pairs \\ \midrule
     Original & 25.5308 & 10.5062 & 3.1082 & 2400 \\
-    Modified & 26.6192 & 16.9867 & 15.8120 & 2326
+    Modified & 26.6192 & 16.9867 & 15.8120 & 2326 \\ \midrule
+    \multicolumn{5}{c}{Baselines} \\ \midrule
+    Random noise & 183.6398 & 27.1631 & 1.8888 & 2400 \\
+    Input pairs & 33.6121 & 13.3207 & 0.6291 & 500
 \end{tabular}
 \end{table}
 
-We evaluate results quantitatively by computing the Hausdorff similarity metric between each ground truth test set image and a corresponding image conditionally generated by the model with $\tau = 0.1$, using the same method as described in Section~\ref{sec:quant-eval}. Results are reported in Table~\ref{tbl:class-results}.
+We evaluate results quantitatively by computing the Hausdorff similarity metric between each ground truth test set image and a corresponding image conditionally generated by the model with $\tau = 0.1$, using the same method as described in Section~\ref{sec:quant-eval}.
+Results are reported in Table~\ref{tbl:class-results}.
+We also include a random noise baseline and an input pairs baseline.
 
 \begin{table}[h]
 \centering
@@ -75,7 +86,8 @@ We evaluate results quantitatively by computing the Hausdorff similarity metric 
 \end{tabular}
 \end{table}
 
-Finally, we report the classification accuracy from the modified model, generated by comparing the highest probability predicted class to the ground truth class. The classifying model has an overall accuracy of 74.54\%, with accuracy rates per class reported in Table~\ref{tbl:class-acc}.
+Finally, we report the classification accuracy from the modified model, generated by comparing the highest probability predicted class to the ground truth class.
+The modified model has an overall classification accuracy of 74.54\%, with accuracy rates per class reported in Table~\ref{tbl:class-acc}.
 
 One factor that may partially explain the classifying model's lack of improvement in generating conditional images over the basic model is the reduced latent vector size.
 Both models set $n_z$ to be 128, but the basic model is able to use the entire latent vector to encode the input drawing, while the classifying model must reserve 10 dimensions for the digit class vector.
@@ -91,6 +103,6 @@ Although we did not quantitatively evaluate these results, we report visual resu
     \caption[Examples of style transfer using the classifying model]
     {Examples of style transfer using the classifying model.
     Outputs were decoded at $\tau=0.1$.
-    In the last two rows, the model misclassified the inptu 5 as 3 and the input 4 as 9, resulting in the incorrect decoded output.
+    In the last two rows, the model misclassified the input 5 as 3 and the input 4 as 9, resulting in the incorrect decoded output.
     \label{fig:style-trans}}
 \end{figure}
