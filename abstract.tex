@@ -1,5 +1,7 @@
-\TODO{attention-grabbing sentence?}
-In this work, we explore the applications of generative modeling to the design of vector graphics and establish a data-driven approach for creating preliminary vector drawings upon which designers can iterate.
-We present an end-to-end pipeline for a supervised training system on Scalable Vector Graphics (SVGs) that learns to reconstruct training data and generate novel, unseen examples and demonstrate its results on font glyphs.
-Our approach uses a variational autoencoder to learn sequences of SVG drawing commands and generates both input-based and unconditioned editable SVG outputs.
-To investigate improvements to model performance, we perform two experiments: one on the effects of various SVG feature encodings on generated outputs, and one on a classifying model architecture for multi-class datasets.
+Today, designers work in tandem with computerized tools to create stylized graphic designs, diagrams, and icons.
+In this work, we explore the applications of generative modeling to the design of vectorized drawings, with a focus on font glyphs.
+We establish a data-driven approach for creating preliminary graphics upon which designers can iterate.
+To accomplish this, we present an end-to-end pipeline for a supervised training system on Scalable Vector Graphics (SVGs) that learns to reconstruct training data and produce similar but novel examples.
+We demonstrate its results on selected characters using a Google Fonts dataset of 2552 font faces.
+Our approach uses a variational autoencoder to learn sequences of SVG drawing commands and is capable of both recreating ground truth inputs and generating unseen, editable SVG outputs.
+To investigate improvements to model performance, we perform two experiments: one on the effects of various SVG feature encodings on generated outputs, and one on a modified architecture that explictly encodes style and class separately for multi-class generation.
