@@ -90,7 +90,7 @@ The remaining glyph statistics can be found in Appendix~\ref{app:data}.
 \section{Training}\label{sec:training}
 We train a separate instance of the model for each of the glyphs \textbf{b}, \textbf{f}, \textbf{g}, \textbf{o}, and \textbf{x}, chosen because they cover a variety of shapes and curves.
 Each input SVG is transformed to a list of feature vectors using the method described in Chapter~\ref{chap:features}.
-We use encoding B to translate SVG commands to feature fectors, details of which are described in Chapter~\ref{chap:feature-variation}.
+We use encoding B to translate SVG commands to feature vectors, details of which are described in Chapter~\ref{chap:feature-variation}.
 The datasets are then randomly partitioned into training, test, and validation sets; glyphs from the overall dataset of 2552 font faces are pruned if they consist of more than 250 feature vectors.
 Every glyph except \textbf{x} has a training set of 1920 SVGs, while \textbf{x} has a training set of 1960.
 All glyphs have test and validation sets of 240 SVGs each.

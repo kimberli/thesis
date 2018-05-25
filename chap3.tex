@@ -55,7 +55,7 @@ Instead of controlling these factors in the preprocessing stage, our architectur
 We aim to produce a system capable of modeling general SVGs, so inputs can contain any path command specified in Table~\ref{tbl:svg-commands}.
 To avoid training bias and to constrain the problem space, we consolidate the different path commands into a single feature representation that encompasses all possible path pen movements.
 
-Out of the five SVG path commands, three are parametic equations of differing degrees, so we can model these three (lines, quadratic B\'eziers, and cubic B\'eziers) using the parameter space for the highest degree cubic-order equation.
+Out of the five SVG path commands, three are parametric equations of differing degrees, so we can model these three (lines, quadratic B\'eziers, and cubic B\'eziers) using the parameter space for the highest degree cubic-order equation.
 An elliptical arc segment, on the other hand, cannot be perfectly transformed into a cubic B\'ezier.
 Arcs have five extra parameters used to describe them ($x$-radius, $y$-radius, angle of rotation, the large arc flag, and the sweep flag), so to compress their encoding we approximate them with the same parameter space as used for our parametric commands.
 We use the method described in Appendix~\ref{app:algs} to approximate arc segments as cubic B\'eziers.
