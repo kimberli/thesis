@@ -1,19 +1,19 @@
 \chapter{Introduction}
 
-The computerization of graphic design has had wide ranging effects on the design process, from introducing software for arranging visual and text layouts to providing platforms for distribting and sharing creations.
+The computerization of graphic design has had wide ranging effects on the design process, from introducing software for arranging visual and text layouts to providing platforms for distributing and sharing creations.
 As design tools such as bitmap and vector image editing programs improve, the design process becomes less complex and tedious, leaving designers room to focus on the high-level creation process.
 In this work, we explore the applications of generative modeling to the design of vector graphics and establish a data-driven approach for creating preliminary vector drawings upon which designers can iterate.
-We present an end-to-end pipeline for a supervised training system on Scalable Vector Graphics (SVGs) that learns to reconstruct training data and generate novel, unseen examples and demonstrate its results on font glyphs.
+We present an end-to-end pipeline for a supervised training system on Scalable Vector Graphics (SVGs) that learns to reconstruct training data and generate novel examples, and we demonstrate its results on font glyphs.
 
 Our motivation for examining the generation of designs is two-fold.
 One, we see practical purpose in a recommendation tool that augments a designer's experience, and we believe such a tool would be a valuable addition to a designer's creative process.
-Two, we believe demystifying their generation would further solidify understanding of the intent and structure of human-created designs.
-In algorithmically mimicking the process by which glyphs are created, we hope to gain a deeper grasp of from where humans' notion of design and style arises.
+Two, we hope learning to algorithmically mimic the process by which glyphs are created will offer insight into the intent and structure behind human-created designs.
 
-Although many strides have been made in understanding and synthesizing rasterized images and designs, primarily with convolutional neural networks, we focus our investigation on the domain of vectorized images in this work.
+Although much work has been done in understanding and synthesizing rasterized images and designs, primarily with deterministic computer vision algorithms and convolutional neural networks, we focus our investigation on the domain of vectorized images in this work.
 The two representations are quite different, and we aim to both produce generated designs with fewer aesthetically displeasing artifacts as well as investigate what new information about designs' underlying shapes and structures can be quantified and learned with the vectorized data format.
+Importantly, our method produces ready-to-edit SVG designs whose component lines and curves can be easily adjusted and rearranged.
 
 In the next chapter, we provide further background on the domain and discuss related work.
 Then, in the following chapters, we delve into the methods used to train our vector graphics generator on the data processing side as well as the model architecture side.
-We then demonstrate our methods as applied to font glyph generation, using a single-class as well as a multi-class approach.
+We then demonstrate our methods as applied to font glyph generation, using a selected set of characters.
 Finally, we describe two experiments, one for comparing feature encodings, and one for explicitly encoding style in the model's latent space.
