@@ -1,10 +1,17 @@
 \chapter{Conclusion}
 Through this work, we demonstrate the viability of a generalized vector graphics generation method by modeling SVGs as sequences of drawing commands.
-Inspired by~\cite{ha2017neural}, our model extends the sequence-to-sequence variational autoencoder approach to model curve control points as well as pen drawing points, producing parameterized B\'ezier curves as output.
+Inspired by~\cite{ha2017neural}, our approach extends the sequence-to-sequence variational autoencoder model to learn curve control points as well as pen drawing points, producing parameterized SVG curves as output.
 
-We train the model on font glyphs, first establishing single-class models of selected character glyphs.
-Next, we investigate feature encodings' effects on model performance, quantified using an image similarity metric on raster image output.
-Finally, we explore adjustments to explicitly encode style and content separately in the architecture and train on a multi-class set of digit glyphs.
+We train the model on font glyphs, first establishing single-class models of selected character glyphs and evaluating produced output qualitatively and quantitatively.
+Next, we investigate feature encodings' effects on model performance, quantified using an image similarity metric on raster image output, and we find significant differences in generation performance likely related to control point proximity in the feature representation.
+Lastly, we explore adjustments to explicitly encode style and content separately in the architecture and train on a multi-class set of digit glyphs.
+Although we do not see major differences in model performance in this experiment, we demonstrate learned classification and style transfer.
 
-Although this work is preliminary, it sets the groundwork for future development of creative tools for designers.
-By avoiding explicit parameterizations for vector graphics images, we build a framework for future generalizable tools that propose novel first draft designs.
+There is certainly room for future work.
+The model's generative performance could always be improved, perhaps with the help of latent space interpretation, and post-processing of output glyphs may help solve common failure modes in the current model like disconnected paths and misplaced components.
+We also believe a proof-of-concept design suggestion tool that proposes preliminary drawings and allows for interactive editing would be illustrative.
+Additionally, further work is needed to demonstrate the generalizability of the model, especially on other domains such as icons and logos.
+
+Our approach may be exploratory, but it sets the groundwork for future development of creative tools for designers.
+By avoiding explicit parameterizations for vector graphics images, we build a framework for generalizable tools that propose novel first draft designs.
+Through this work, we make steps towards a future in which the design process becomes less monotonous and more creative.
