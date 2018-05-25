@@ -20,7 +20,7 @@ We modify this architecture to also generate a label vector $z_l$ from the encod
 Assuming there are $n_c$ input classes and a latent space dimension of $n_z$, we adjust $\mu$ and $\sigma$ to be of dimension $n_z - n_c$, then perform the original transformation from $\mu$ and $\sigma$ to generate what we now denote as $z_s$.
 We concatenate these two vectors, $z_l$ and $z_s$, to form $z$, which is then fed into the decoder as before.
 
-Finally, we add another term in the loss function representing the log loss of the label prediction with the ground truth label (encoded as a $n_c$-dimensional one-hot vector).
+Finally, we add another term in the cost function representing the log loss of the label prediction with the ground truth label (encoded as a $n_c$-dimensional one-hot vector).
 With the ground truth label encoded as $(c_1, \cdots, c_{n_c})$, the log loss of label prediction is:
 
 \begin{equation}
@@ -33,7 +33,7 @@ To generate a multi-class dataset, we combine datasets for the digit glyphs (i.e
 Input SVGs are encoded using encoding B as described in Chapter~\ref{chap:feature-variation}.
 Overall, the resulting dataset has 20k training examples, 2.4k test examples, and 2.4k validation examples.
 
-Both models were trained for 450k iterations with the same parameters as models described in Chapter~\ref{chap:training}, and details about training loss can be found in Appendix~\ref{app:train}.
+Both models were trained for 450k iterations with the same parameters as models described in Chapter~\ref{chap:training}, and details about training cost can be found in Appendix~\ref{app:train}.
 
 \begin{figure}[h]
     \centering

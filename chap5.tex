@@ -94,9 +94,9 @@ We use encoding B to translate SVG commands to feature vectors, details of which
 The datasets are then randomly partitioned into training, test, and validation sets; glyphs from the overall dataset of 2552 font faces are pruned if they consist of more than 250 feature vectors.
 Every glyph except \textbf{x} has a training set of 1920 SVGs, while \textbf{x} has a training set of 1960.
 All glyphs have test and validation sets of 240 SVGs each.
-Training is done with a batch size of 40, a learning rate of 0.001, and a KL weight in the loss function that starts at 0.01 and increases asymptotically over time.
+Training is done with a batch size of 40, a learning rate of 0.001, and a KL weight in the cost function that starts at 0.01 and increases asymptotically over time.
 The size of the latent space vector $z$ is set to 128, and we use recurrent dropout to reduce overfitting.
-Loss graphs and details about trained models can be found in Appendix~\ref{app:train}.
+Cost graphs and details about trained models can be found in Appendix~\ref{app:train}.
 
 \section{Results}
 Here, we report quantitative results as well as a qualitative evaluation of model performance.
@@ -151,7 +151,7 @@ We also provide baselines for the Hausdorff metric: one comparison between input
 We demonstrate the model's learned ability with a few illustrative examples.
 
 In Figure~\ref{fig:interp}, we interpolate between latent vectors for input \textbf{b} and \textbf{f} glyphs of different styles.
-If interpolated latent vectors tend to produce coherent outputs, it indicates that the KL regularization term in the loss function is sufficiently forcing the latent space to be used efficiently.
+If interpolated latent vectors tend to produce coherent outputs, it indicates that the KL regularization term in the cost function is sufficiently forcing the latent space to be used efficiently.
 \begin{figure}[h]
     \centering
 	\includegraphics[width=\textwidth]{figures/interp}

@@ -15,8 +15,8 @@ vec[7] = pen_up
 vec[8] = end
 """
 def rotate(pt, theta):
-    new_x = pt.real * math.cos(theta) - pt.imag * math.sin(theta)
-    new_y = pt.real * math.sin(theta) + pt.imag * math.cos(theta)
+    new_x = pt.x * math.cos(theta) - pt.y * math.sin(theta)
+    new_y = pt.x * math.sin(theta) + pt.y * math.cos(theta)
     return Point(new_x, new_y)
 
 def enc_A(bez, next_state):
