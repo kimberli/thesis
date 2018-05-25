@@ -65,6 +65,6 @@ After all path drawing command types have been transformed to use the parameters
 Finally, for each \code{move} command and each disjoint path, we insert a feature vector that encodes the new end point and sets the pen state to note that the pen is up.
 
 In all, our feature representation models each drawing command as a nine-dimensional vector (in contrast to the five-dimensional feature vector for polyline drawings in~\cite{ha2017neural}).
-Six dimensions are used to model three $x, y$ coordinate parameters of cubic B\'eziers, and three dimensions are reserved for the pen up ($p_u$), pen down ($p_d$), and end drawing ($p_e$) pen states.
+Six dimensions are used to model three $x, y$ coordinate parameters of cubic B\'eziers, and three dimensions are reserved for the \textit{pen down} ($p_d$), \textit{pen up} ($p_u$), and \textit{end drawing} ($p_e$) pen states.
 Each input SVG is transformed into a sequence of commands, which is in turn translated into a sequence of these feature vectors.
 In Chapter~\ref{chap:feature-variation}, we examine further details of this feature transformation process and how our representation modifications affect modeling performance.
