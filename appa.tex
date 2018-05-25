@@ -1,4 +1,5 @@
-\chapter{Algorithms}\label{app:algs}
+\chapter{Arc conversion}\label{app:algs}
+Our method for approximating SVG arc segments with cubic B\'ezier curves is as follows:
 \begin{enumerate}
     \item Extract the arc parameters: start coordinates, end coordinates, ellipse major and minor radii, rotation angle from $x$ and $y$ axes, large arc flag, and sweep flag. 
     \item Transform ellipse into unit circle by rotating, scaling, and translating, and save those transformation factors.
